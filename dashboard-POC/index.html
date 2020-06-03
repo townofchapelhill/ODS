@@ -1,0 +1,101 @@
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="assets/css/odometer-theme-minimal.css"/>
+        <link rel="stylesheet" href="columntest.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="assets/js/odometer.min.js"></script>
+        <script src="https://use.fontawesome.com/53dde11fa6.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+    
+        <div class="row" style="height:48%">
+          <div class="col-xs-6 col-sm-4" style="color: white; background-color: #61c491">
+                <h1 align='center'><i class="fa fa-building-o" aria-hidden="true"></i> Permits</h1> 
+                <div class="row">
+                    <div class="col-lg-8">
+                        <p>&nbsp;&nbsp;&nbsp;Issued in <span class ="currMonth">month</span>: <span id="issuedMonth" class="odometer">0</span></p>
+                        <p>&nbsp;&nbsp;&nbsp;Issued today: <span id="issuedToday" class="odometer">0</span></p>
+                        <p>&nbsp;&nbsp;&nbsp;Filed in <span class ="currMonth">month</span>: <span id="filedMonth" class="odometer">0</span></p>
+                        <p>&nbsp;&nbsp;&nbsp;Filed today: <span id="filedToday" class="odometer">0</span></p>
+                    </div>
+                </div>
+          </div>
+          
+          <div class="col-xs-6 col-sm-4" style="color: white; background-color: #f44641">
+                <h1 align='center'><i class="fa fa-book" aria-hidden="true"></i> Library</h1> 
+                <div class="row">
+                    <div class="col-lg-8">
+                        <p>Items on loan: <span id="checkedOut" class="odometer">0</span></p>
+                        <p>% checked out: <span id="percentOut" class="odometer">0</span>%</p>
+						<p>Active patrons: <span id="activeP" class="odometer">0</span></p>
+                    </div>
+                </div>
+          </div>
+          
+          <div class="col-xs-6 col-sm-4" style="color: white; background-color: #1975bc">
+                <h1 align="center"><i class="fa fa-shield" aria-hidden="true"></i> Police</h1>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h5><b>From July 1, 2017 to December 31, 2017: </b></h5>
+                        <p>Training Hours: <span id="hours" class="odometer">0</span></p>
+                        <p>Community Engagement: 218 Events for a total of 415 hours</span></p>
+                        <p>Calls for Service: <span id="calls" class="odometer">0</span></p>
+                    </div>
+                </div>
+          </div>
+        </div>
+        
+        
+        <div class="row" style="height:48%">
+          <div class="col-xs-6 col-sm-4" style="color: white; background-color: #1975bc">
+                <h1 align='center'><i class="fa fa-bus" aria-hidden="true"></i> Transit</h1> 
+                <div class="row">
+                    <div class="col-lg-8">
+                        <p>&nbsp;&nbsp;&nbsp;Active routes today: <span id="activeR" class="odometer">0</span></p>
+                        <p>&nbsp;&nbsp;&nbsp;Buses currently in service: <span id="inService" class="odometer">0</span></p>
+                        <p>&nbsp;&nbsp;&nbsp;Current average speed: <span id="avgSpeed" class="odometer">0</span> MPH</p>
+                    </div>
+                </div>
+          </div>
+        
+          <div class="col-xs-6 col-sm-4" style="color: white; background-color: #555555">
+                <h1 align='center'><i class="fa fa-globe" aria-hidden="true"></i> Website</h1> 
+                <div class="row">
+                    <div class="col-lg-8">
+					    <h5><b>townofchapelhill.org</b></h5>
+					    <p>Sessions today: <span id="sessionsToday" class="odometer">0</span></p>
+                        <p>Sessions in the past 30 days: <span id="sessionsMonth" class="odometer">0</span></p>
+                        <p>Top search today: <span id="topSearchToday">None</span></p>
+                        <p>Top search in the past 30 days: <span id="topSearchMonth">None</span></p>
+                    </div>
+                </div>
+          </div>
+         
+          <div class="col-xs-6 col-sm-4" style="color: white; background-color: #00bff3">
+                <h1 align='center'><i class="fa fa-database" aria-hidden="true"></i> Open Data </h1> 
+                <div class="row">
+                    <div class="col-lg-8">
+                        <p>Number of data sets: <span id="numD" class="odometer">0</span></p>
+                        <p>Number of records: <span id="numR" class="odometer">0</span></p>
+                        <p>Number of unique visitors of the site: <span id="numU" class="odometer">0</span></p>
+                    </div>
+                </div>
+          </div>
+        </div>
+        
+        <div class="row" style="height:4%">
+          <div class="col-sm-12" style="color: white; background-color: gray">
+                <p id="stamp" style="color: black"></p> 
+          </div>
+        </div>
+        
+        <script type="text/javascript" src="secrets.js"></script>
+        <script type="text/javascript" src="columntest.js"></script>
+    
+    </body>
+    
+</html>
