@@ -1,0 +1,115 @@
+.nav {
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+#header {
+    margin-bottom: 20px;
+}
+
+#date {
+    width: 40%;
+}
+
+h1 {
+    float: left;
+}
+
+#title {
+    margin-left: 10%;
+    font-weight: bold;
+    border-bottom: 1px dotted gray;
+    width: 40%;
+}
+
+#img {
+    float: right;
+    margin-right: 25%;
+    height: 40px;
+    width: 120px;
+};
+
+#table-holder {
+    width: auto;
+    border-bottom: 6px inset #7094db; 
+}
+
+body {
+    background-image: url('./assets/tiny-squares.png');
+}
+
+#reservation-display {
+    float: right;
+    margin-left: 9.5%;
+    margin-top: 3%;
+    max-height: 400px;
+    max-width: 1450px;
+    text-align: center;
+    align-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+};
+
+table {
+    /* z-index: 1; */
+    text-align: center;
+    align-content: center;
+    border-collapse: collapse;
+}
+
+.table-row {
+    background-color: #4259a3;
+    border-left: 6px inset #7094db;
+}
+
+#table-border {
+    background-color: #4259a3;
+    border-left: 6px inset #7094db;
+    border-bottom: 6px outset #7094db;
+}
+
+.table-section {
+    background-image: url(./assets/3px-tile.png);
+    padding: 3px;
+    height: 30px;
+    border: 3px solid #4259a3;
+    color: beige;
+}
+
+.table-description {
+    margin-left: 7%;
+    padding: 3px; 
+    align-content: center;
+    position: relative;
+    max-height: 55px;
+    max-width: 405px;
+    overflow: scroll auto;
+}
+
+#border {
+    margin-left: 9.3%; 
+    margin-top: -1%;
+    left: 95%;
+    border-bottom: 6px solid #4fc4f9;
+    border-left:  7px solid #4fc4f9;
+    -webkit-box-shadow: 0 7px 4px #777;
+	-moz-box-shadow: 0 7px 4px #777;
+	box-shadow: 0 7px 4px #777;
+}
+
+#brand {
+    margin-top: 2%; 
+    text-align: center;
+}
+
+.footer {
+    margin-top: 5%;
+    margin-bottom: -5%;
+    border-top: 1px dotted gray;
+    background-color: whitesmoke;
+}

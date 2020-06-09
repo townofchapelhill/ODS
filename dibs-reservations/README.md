@@ -34,7 +34,3 @@ Dependencies:
  bootstrap
 <br>
  jQuery
-</br>
-
-### dibbs_extract.py
-A script to extract reservation history via the Dibs API
