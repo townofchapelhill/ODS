@@ -34,4 +34,3 @@ Dependencies:
  bootstrap
 <br>
  jQuery
-</br>
