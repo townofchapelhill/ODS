@@ -1,4 +1,5 @@
 ### Dictionary to translate the abbreviated nextbus direction to an expanded readable direction
+### NOTE: This translation table is incomplete and needs updating
 
 direction_lookup = {
     "tomlkblvd"	: "To Martin Luther King Jr Blvd",
@@ -20,5 +21,9 @@ direction_lookup = {
     "tomcdougle" : "To McDougle School",
     "2friday" : "To Friday Center Parking Lot",
     "tovarsity" : "To Varsity Theater",
-    "2booker" : "To Booker Creek"
+    "2booker" : "To Booker Creek",
+    "homesout" : "Homestead Outbound",
+    "weinseve" : "Weiner at Severin"
 }
+
+#  print(direction_lookup)
