@@ -109,7 +109,11 @@ def write_csv(obj_reservations, day):
 # start script
 if __name__ == '__main__':
     # accumulate all reservations for the past 143 days
-    for day in range(-143,0):
-        get_reservations(day)
+    #for day in range(-143,0):
+    #    get_reservations(day)
+
+    # append only the previous day's reservations to the file
+    get_reservations(0)
+    
     log_message['Message'] = "Run Complete"
     print(log_message)
