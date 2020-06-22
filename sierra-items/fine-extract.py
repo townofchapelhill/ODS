@@ -9,8 +9,8 @@ import csv
 import json
 import os
 import pathlib
-# import datetime
-import secrets, filename_secrets
+import secrets
+import filename_secrets
 
 # authenticate to the Sierra API
 def get_token():
