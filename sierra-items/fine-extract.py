@@ -34,7 +34,8 @@ def get_patron_record(patronURL):
     else:
         patronRecord = json.loads(response.text)
         pType = patronRecord["patronType"]
-    return pType
+        patronID = patronRecord["id"]
+    return pType, patronID
 
 # retrieve linked bib record
 def get_bib_record(bibId):
@@ -70,9 +71,10 @@ def get_fine_records(outputFile):
     # last_year = datetime.datetime.now() - datetime.timedelta(weeks= 52)
     # query_date = "[" + last_year.isoformat().split('T')[0] + ",]"
     # changing the initial value of 'i' alters the start record retrieved
+    query_date = "[2020-04-01,]"
     i = 0
     header = {"Authorization": "Bearer " + sierraToken}
-    outputRecord = {'fine_id': '', 'materialType': '', 'pType': 0, 'chargeType': '', 'itemCharge': 0.0, 'processingFee': 0.0, 'billingFee': 0.0, 'paidAmount': 0.0, 'assessedDate': ''}
+    outputRecord = {'fine_id': '', 'materialType': '', 'pType': 0, 'chargeType': '', 'itemCharge': 0.0, 'processingFee': 0.0, 'billingFee': 0.0, 'paidAmount': 0.0, 'assessedDate': '', 'patronID': ''}
     fieldNames = outputRecord.keys()
     with open(outputFile, 'a') as csvfile:
       writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
@@ -80,9 +82,9 @@ def get_fine_records(outputFile):
           # write the header if the file is empty
           writer.writeheader()
       while True:
-        fineURL = "https://catalog.chapelhillpubliclibrary.org:443/iii/sierra-api/v5/fines/?limit=50&offset=" + str(i)
+        #fineURL = "https://catalog.chapelhillpubliclibrary.org:443/iii/sierra-api/v5/fines/?limit=50&offset=" + str(i)
         # add a time span to the query - requires 'query_date' lines above to be uncommented
-        #fineURL = "https://catalog.chapelhillpubliclibrary.org:443/iii/sierra-api/v5/fines/?limit=50&offset=" + str(i) + "&assessedDate=" + query_date
+        fineURL = "https://catalog.chapelhillpubliclibrary.org:443/iii/sierra-api/v5/fines/?limit=99&offset=" + str(i) + "&assessedDate=" + query_date
         response = requests.get(fineURL, headers=header)
         if response.status_code != 200:
             print(f'fine retrieval failed for {fineURL} with response code:{response.status_code} ')
@@ -102,7 +104,7 @@ def get_fine_records(outputFile):
                 else:
                     outputRecord['materialType'] = "none"
                 outputRecord['fine_id'] = fineRecord['id']   
-                outputRecord['pType'] = get_patron_record(patronURL)
+                outputRecord['pType'], outputRecord['patronID'] = get_patron_record(patronURL)
                 outputRecord['chargeType'] = fineRecord["chargeType"]["display"]
                 outputRecord['itemCharge'] = fineRecord["itemCharge"]
                 outputRecord['processingFee'] = fineRecord["processingFee"]
