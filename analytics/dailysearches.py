@@ -6,6 +6,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import secrets
 import datetime
 import filename_secrets
+import os
 
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 KEY_FILE_LOCATION = "client_secrets.json"
