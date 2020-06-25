@@ -1,19 +1,18 @@
-# Error log
-ambientweatherlog = open("ambientweatherlog.txt","w")
-
-
 # Libraries
-try: 
-	import json
-	import requests
-	import csv
-	import secrets
-	import os
-	import traceback
-	import filename_secrets
-except: 
-	ambientweatherlog.write("Issue importing. \n")
+import json
+import requests
+import csv
+import os
+import secrets, filename_secrets
+import pathlib
+import traceback
 
+stagingDirectory = pathlib.Path(filename_secrets.productionStaging)
+logDirectory = pathlib.Path(filename_secrets.logfilesDirectory)
+logFile = logDirectory.joinpath("ambientweatherlog.txt")
+
+# Error log
+ambientweatherlog = open(logFile,"w")
 
 # makes the request
 def get_weather_info():
@@ -32,8 +31,8 @@ def get_data(info_sheet):
 	
 	# stores response info as a variable
 	weather_info = get_weather_info()
-	print("Here's your info: " )
-	print(weather_info)
+	#print("Here's your info: " )
+	#print(weather_info)
 	
 	# writes weather data to CSV
 	info_sheet.write(str(weather_info[2]['tempf']) + " F, ")
@@ -48,8 +47,8 @@ def get_data(info_sheet):
 	
 	
 # main function to create log and call get_data	
-def main():
-	infofilename = os.path.join(filename_secrets.productionStaging, "ambient-weather.csv")
+if __name__ == '__main__':
+	infofilename = stagingDirectory.joinpath("ambient-weather.csv")
 	info_sheet = open(infofilename, "a")
 
 	# if there is data in the response, write CSV headers
@@ -58,7 +57,3 @@ def main():
 		
 	get_data(info_sheet)
 	info_sheet.close()
-
-
-# main
-main()

@@ -68,7 +68,7 @@ def print_response(response):
       dateRangeValues = row.get('metrics', [])
 
       for header, dimension in zip(dimensionHeaders, dimensions):
-        daily = ((header) + ': ' + dimension)).replace("ga:searchKeyword: ", "")
+        daily = ((header) + ': ' + dimension).replace("ga:searchKeyword: ", "")
         term = daily.replace('"',"")
         term = term.replace(",","")
         dailytownsearch.write(term + ", ")
@@ -82,7 +82,8 @@ def print_response(response):
   dailytownsearch.close()
       
 def main():
-  log_file = open("townanalyticserrorlog.txt", "a")
+  logFilename = os.path.join(filename_secrets.logfilesDirectory, "townanalyticserrorlog.txt")
+  log_file = open(logFilename, "a")
   try:
     analytics = initialize_analyticsreporting()
     response = get_report(analytics)

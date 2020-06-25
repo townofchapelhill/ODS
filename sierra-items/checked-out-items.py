@@ -3,10 +3,13 @@ import requests
 import csv
 import json
 import datetime
-import secrets
+import pathlib
+import secrets, filename_secrets
 
 now = datetime.datetime.now()
 today = now.isoformat().split('T')[0]
+
+stagingPath = pathlib.Path(filename_secrets.productionStaging)
 
 # function that gets the authentication token
 def get_token():
@@ -54,7 +57,8 @@ def update_items(writer):
 print(str(now))
 
 # open a csv file for writing
-items = open('//CHFS/Shared Documents/OpenData/datasets/staging/checked_out_items.csv', 'w')
+itemFile = stagingPath.joinpath('checked_out_items.csv')
+items = open(itemFile, 'w')
 
 # create a csvwriter object
 csvwriter = csv.writer(items)
@@ -66,4 +70,4 @@ update_items(csvwriter)
 # close file
 items.close()
 
-print(str(datetime.datetime.now()))
+print(f'Processing complete {str(datetime.datetime.now())}')

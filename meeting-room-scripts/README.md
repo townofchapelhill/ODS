@@ -7,17 +7,10 @@ The updated scripts for the meeting room data now retrieve both future meeting r
 
 <strong>IMPORTANT NOTE</strong>
 
-This version of "aggregate_reservations.py" is different from the version that's running on the server.  This version is set to retrieve as many historical records as the API will allow you to retrieve in one go.  The script on the server just appends the previous day's reservations to the master CSV.
+"aggregate_reservations.py" may accumulate all reservations for the last 144 days - the maximum that the API will permit.  The code is commented out for daily runs which append the previous day's reservations to the master CSV.
 
-In the event that the master CSV is lost, you can use this version of "aggregate_reservations.py" to recreate it.
-
+In the event that the master CSV is lost, uncomment the loop code to recreate it.
 <pre>
- _____ _                      _   _   _ _ _ _ 
-/  __ \ |                    | | | | | (_) | |
-| /  \/ |__   __ _ _ __   ___| | | |_| |_| | |
-| |   | '_ \ / _` | '_ \ / _ \ | |  _  | | | |
-| \__/\ | | | (_| | |_) |  __/ | | | | | | | |
- \____/_| |_|\__,_| .__/ \___|_| \_| |_/_|_|_|
-                  | |                         
-                  |_|       
-</pre>           
+for day in range(-143,0):
+    get_reservations(day)
+</pre>
