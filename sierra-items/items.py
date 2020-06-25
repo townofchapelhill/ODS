@@ -3,9 +3,11 @@ import requests
 import csv
 import json
 import datetime
-import secrets
+import os
+import secrets, filename_secrets
 
 now = datetime.datetime.now()
+stagingDirectory = filename_secrets.productionStaging
 
 # function checks if a string is an ASCII (english characters only)
 def is_ascii(s):
@@ -66,7 +68,8 @@ def update_items(writer):
 print(str(now))
 
 # open a csv file for writing
-items = open('items.csv', 'w')
+itemFile = os.path.join(filename_secrets.productionStaging, "items.csv")
+items = open(itemFile, 'w')
 
 # create a csvwriter object
 csvwriter = csv.writer(items)
