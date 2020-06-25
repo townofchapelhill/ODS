@@ -1,20 +1,16 @@
-# Create file to log exception handling
-log_file = open("dailysessionserror.txt", "a")
-
 # Import modules/libraries
-try: 
-    from apiclient.discovery import build
-    from oauth2client.service_account import ServiceAccountCredentials
-    import secrets
-    import traceback
-    import datetime
-    import csv
-    import os
-    import filename_secrets
-except:
-    print("Could not import all libraries.")
-    log_file.write("Library Import Failed")
-    log_file.write(traceback.format_exc())
+import secrets
+import traceback
+import datetime
+import csv
+import os
+import filename_secrets
+from apiclient.discovery import build
+from oauth2client.service_account import ServiceAccountCredentials
+
+# Create file to log exception handling
+logFilename = os.path.join(filename_secrets.logfilesDirectory, "dailysessionserror.txt")
+log_file = open(logFilename, "a")
 
 # Authentication 
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
