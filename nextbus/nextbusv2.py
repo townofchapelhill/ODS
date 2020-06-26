@@ -1,28 +1,29 @@
 try: 
-    import nextbus_direction_transformation
-    import pathlib
-    import secrets, filename_secrets
     import urllib.request
     import xml.etree.ElementTree as ET
     import csv
+    import os
     import datetime
     import traceback
+    import filename_secrets
 except: 
 	print(traceback.format_exc())
 
 now = datetime.datetime.now()
 today = datetime.date.today()
 
-# create production file paths
-stagingPath = pathlib.Path(filename_secrets.productionStaging)
-loggingPath = pathlib.Path(filename_secrets.logfilesDirectory)
-
 # create an xml file in the open data unpublished folder
-bus_file = stagingPath.joinpath("nextbusroutes.xml")
+bus_file = os.path.join(filename_secrets.productionStaging, "nextbusroutes.xml")
 
-# open the log file
-logFilename = loggingPath.joinpath(str(today) + '-nextbuslog.txt')
-log_file = open(logFilename, 'w')
+# throw an error if a "/logs" directory doesn't exist
+try:
+    logFilename = os.path.join(filename_secrets.logfilesDirectory, str(today) + "-nextbuslog.txt")
+    log_file = open(logFilename, 'w')
+except:
+    errorFilename = os.path.join(filename_secrets.logfilesDirectory, "error.txt")
+    error_file = open(errorFilename, 'w')
+    error_file.write('ERROR - "logs" directory not found\n')
+    error_file.close()
     
 # Define function to combine the XML files at each url
 def combine_routes(filename):
@@ -89,8 +90,9 @@ def convert_to_csv():
     root = tree.getroot()
 
     # Create a CSV file in the open data unpublished folder for writing
-    bus_data_file = stagingPath.joinpath("nextbusroutes.csv")
-    bus_data = open(bus_data_file, 'w')
+    bus_file = os.path.join(filename_secrets.productionStaging, "nextbusroutes.csv")
+    bus_data = open(bus_file, 'w')
+    log_file.write('CSV file created.\n')
 
     # Create the csv writer object
     csvwriter = csv.writer(bus_data)
@@ -139,10 +141,7 @@ def convert_to_csv():
                     bus_info.append(schedule)
                     days = route.attrib['serviceClass']
                     bus_info.append(days)
-                    if nextbus_direction_transformation.direction_lookup.get(route.attrib['direction']):
-                        direction = nextbus_direction_transformation.direction_lookup[route.attrib['direction']]
-                    else:
-                        direction = route.attrib['direction']
+                    direction = route.attrib['direction']
                     bus_info.append(direction)
                     blockID = tr.attrib['blockID']
                     bus_info.append(blockID)
