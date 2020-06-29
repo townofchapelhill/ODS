@@ -1,6 +1,6 @@
 # import libraries
 import requests
-import secrets
+import secrets, filename_secrets
 import csv
 import json
 import re
@@ -149,22 +149,24 @@ def check_geoBoundary(parsed_patrons):
 # writes the final csv
 def write_csv(checked_addresses, skipped_addresses):
     # writes CSV that's pushed to portal
-    with open("//CHFS/Shared Documents/OpenData/datasets/staging/all_patrons_new.csv", "w+") as update_patrons:
+    newpatronFile = os.path.join(filename_secrets.productionStaging, "all_patrons_new.csv")
+    with open(newpatronFile, "w+") as update_patrons:
         fieldnames = checked_addresses[0].keys()
         csv_writer = csv.DictWriter(update_patrons, fieldnames=fieldnames, extrasaction='ignore', delimiter=',')
         
-        if os.stat('//CHFS/Shared Documents/OpenData/datasets/staging/all_patrons_new.csv').st_size == 0:
+        if os.stat(newpatronFile).st_size == 0:
             csv_writer.writeheader()
         
         for entry in checked_addresses:
             csv_writer.writerow(entry)
 
     # Writes CSV of rejected addresses
-    with open("//CHFS/Shared Documents/OpenData/datasets/staging/bad_patron_addresses.csv", "w+") as bad_patrons:
+    badpatronFile = os.path.join(filename_secrets.productionStaging, "bad_patron_addresses.csv")
+    with open(badpatronFile, "w+") as bad_patrons:
         fieldnames_2 = skipped_addresses[0].keys()
         csv_writer = csv.DictWriter(bad_patrons, fieldnames=fieldnames_2, extrasaction='ignore', delimiter=',')
         
-        if os.stat('//CHFS/Shared Documents/OpenData/datasets/staging/bad_patron_addresses.csv').st_size == 0:
+        if os.stat(badpatronFile).st_size == 0:
             csv_writer.writeheader()
         
         for entry in skipped_addresses:
@@ -183,4 +185,5 @@ def get_token():
     return active_patrons_token
 
 # begin script
-get_all_patrons()
+if __name__ == '__main__':
+    get_all_patrons()
