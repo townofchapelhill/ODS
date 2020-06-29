@@ -85,7 +85,8 @@ def print_response(response):
 
       
 def main():
-  log_file = open("C:/OpenData/PythonScripts/logs/analyticserrorlog_daily.txt", "a")
+  logFilename = os.path.join(filename_secrets.logfilesDirectory, "analyticserrorlog_daily.txt")
+  log_file = open(logFilename, "a")
   try:
     analytics = initialize_analyticsreporting()
     response = get_report(analytics)
