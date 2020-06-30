@@ -1,5 +1,5 @@
 # Libraries
-import secrets
+import secrets, filename_secrets
 import requests
 import json
 import os
@@ -145,7 +145,8 @@ def parse_data(raw_data):
 # Function that writes the final CSV
 def write_data(current_building_pop, childrens_room_total, security_gate_total, writeable_data):
     new_data = writeable_data
-    with open("sensource.csv", "a") as sensource:
+    sensourceFilename = os.path.join(filename_secrets.productionStaging, "sensource.csv")
+    with open(sensourceFilename, "a") as sensource:
         # Holds datetime, split because of strange date interpretation behavior on the Open Data Server
         day_time = str(datetime.datetime.now()).split(".")
         # Writes the rows
@@ -185,4 +186,5 @@ def check_open():
         sys.exit()
 
 # Begins script
-check_open()
+if __name__ == '__main__':
+    check_open()
