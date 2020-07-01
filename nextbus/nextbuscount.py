@@ -5,15 +5,16 @@ import datetime
 from datetime import timedelta
 import traceback
 import os
+import secrets, filename_secrets
 
 now = datetime.datetime.now()
 today = datetime.date.today()
 
 # create an xml file in the open data unpublished folder
-# //CHFS/Shared Documents/OpenData/datasets/staging/
-bus_file = "//CHFS/Shared Documents/OpenData/datasets/staging/nextbuscount.xml"
+bus_file = os.path.join(filename_secrets.productionStaging, "nextbuscount.xml")
 # throw an error if a "/logs" directory doesn't exist
-log_file = open('logs/nextbuscountlog.txt', 'w')
+logFilename = os.path.join(filename_secrets.logfilesDirectory, "nextbuscountlog.txt") 
+log_file = open(logFilename, 'w')
   
 # Define function to combine the XML files at each url
 def combine_routes(filename):
@@ -80,7 +81,7 @@ def convert_to_csv():
     root = tree.getroot()
 
     # Create a CSV file in the open data unpublished folder for writing
-    bus_data_file = "//CHFS/Shared Documents/OpenData/datasets/staging/nextbuscount.csv"
+    bus_data_file = os.path.join(filename_secrets.productionStaging, "nextbuscount.csv")
     bus_data = open(bus_data_file, 'a')
     # log_file.write('CSV file created.\n')
 
